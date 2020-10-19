@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>Chatty</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="https://fonts.googleapis.com/css2?family=Bellota:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+	<link rel='stylesheet' type='text/css' media='screen' href='/assets/css/main.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='/assets/css/search.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='/assets/css/loader.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='/assets/css/sidebar.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='assets/css/calendar.css'>
+	<script type="text/javascript" src="/_common_/require.js" data-main="assets/js/main"></script>
+	<script>
+		window.requireViewModel = function (module,parent,pager) {
+			return function (callback,page) {
+				require([module], function (mod) {
+					/* If the module already exists use that otherwise instantiate it and store it */
+					if(!parent[module]){
+						parent[module] = new mod();
+					}
+					if( parent[module].init ) parent[module].init(page);
+					callback(parent[module]);
+				});
+			};
+		};
+	</script>
+</head>
+
+<body>
+	<div style="height:100vh;width:100%;z-index:10;background:#fff;" data-bind="visible:!masterViewModel.inited()">
+		<center>
+			<img  src="assets/images/logo.png">
+		</center>
+
+		<div class="nb-spinner" style="margin:auto;margin-top:40vh;"></div>
+	</div>
+	<div class="page-container" data-bind="visible:masterViewModel.inited" style="display: none;">
+		<!-- Load sidebar -->
+		<div id="sidebar__container">
+			<!-- ko with:sidebarViewModel-->
+			<div class="page-sidebar">
+				<div style="position: fixed;width: 500px;">
+					<a class="logo-box" href="index.html" style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);padding:4px;padding-left: 15px;">
+						<img src="assets/images/avatar.png" style="width:60px;height:60px;border:2px solid #388FF5;padding:0px;border-radius: 50%;display: inline-block;float:left;">
+						<div style="display: inline-block;margin-left: 20px;" class="mt10">
+							<div class="label__link" data-bind="text:user_name"></div>
+						</div>
+						<button class="btn-neutral pull-right" style="margin-top: 10px;">
+							<i class="fa fa-sliders fnt__25"></i>
+						</button>
+						<i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
+						<i class="icon-close" id="sidebar-toggle-button-close"></i>
+					</a>
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;margin-top: -20px;">
+						<div class="page-sidebar-inner" style="overflow: hidden; width: auto; height: 100%;">
+							<div class="page-sidebar-menu" style="height:91vh;">
+								<div class="menu__block">
+									<div class="d-flex justify-content-center h-100">
+										<div class="searchbar">
+											<input class="search_input" type="text" name="" placeholder="Search...">
+											<a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="menu__block" style="margin-top: 20px;">
+									<label class="label fnt__23" style="margin-top:-8px;">Challenges</label>
+									<button class="btn btn-info fnt__16" style="float:right;" data-bind="click:addChallenge">
+										<i class="fa fa-plus"></i> Create new challenge
+									</button>
+								</div>
+								<ul class="accordion-menu" style="height: 70vh;overflow-y: auto;" data-bind="foreach:calendars">
+									<!-- active-page -->
+									<li  class="pointer">
+										<a data-bind="style:{'border-left':'2px solid '+color(),'background':isCurrent ? '#F9F9F9' : ''},page-href: 'Challenge?id='+id" style="padding:7px;margin-left:10px;height:100px;background:#fff;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow:hidden;border-radius: 10px;padding:5px;margin:10px;">
+											<div class="row">
+												<div class="col-sm-2">
+													<img src="assets/images/calendar.png" style="width:30px;height:30px;padding:0px;border-radius: 5px;display: inline-block;float:left; ">
+												</div>
+												<div class="col-sm-9" style="padding:3px;">
+													<div class="label label__bold fnt__15">
+														<span data-bind="text:name"></span>
+														<span class="pull-right label__muted" style="font-size: 13px;" data-bind="text:creationDate"></span>
+													</div>
+													<div class="label fnt__12" data-bind="text:description">
+													</div>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<a style="position: absolute;bottom: 0;width:100%;height:50px;border-top:1px dashed #ccc;padding:5px;" href="/logout">
+							<button class="btn btn-neutral" style="float: right;">
+								<i class="fa fa-sign-out fnt__20"></i>
+							</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div data-bind="modal:addChallengeModal,with:addChallengeModal" class="modal">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header" style="border:none;">
+							<button type="button" class="close cms-modal-close-button" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title inline-block">
+								<img src="assets/images/calendar.png" width="30">
+								Add new challenge
+							</h3>
+						</div>
+						<div class="modal-body" style="border:none;">
+							<div class="form-group">
+								<label>
+									Name
+								</label>
+								<span style="float: right;">
+									<span data-bind="text:newName.currCount()"></span>
+									/<span data-bind="text:newName.maxCount,style:{'color':newName.onLimit() ? 'red' : ''}"></span>
+								</span>
+								<input class="form-control form__control-lg" data-bind="textInput:newName" placeholder="Enter here...">
+							</div>
+							<div class="form-group">
+								<label>
+									Description
+								</label>
+								<span style="float: right;">
+									<span data-bind="text:newDescription.currCount()"></span>
+									/<span data-bind="text:newDescription.maxCount,style:{'color':newDescription.onLimit() ? 'red' : ''}"></span>
+								</span>
+								<textarea class="form-control form__control-lg" data-bind="textInput:newDescription" placeholder="Enter here..."></textarea>
+							</div>
+							<div class="form-group">
+								<label>
+									How many days will the challenge last?
+								</label>
+								<input class="form-control form__control-lg" type="number" data-bind="textInput:newAmount" placeholder="Enter here...">
+							</div>
+							<div class="form-group">
+								<label>Color (optional)</label>
+								<div data-bind="foreach:colors" class="text-center">
+									<div class="color__item" data-bind="style:{'background':$data},css:{'color__selected':$parent.newColor() == $data},click:$parent.selectColor.bind($data,$data)">
+									</div>
+								</div>
+							</div>              
+						</div>
+						<div class="modal-footer" style="border:none;">
+							<button class="btn btn-neutral" data-dismiss="modal">Close</button>
+							<button class="btn btn-success" data-bind="enable:!adding() && newName() && newDescription() && newAmount(),click:finaliseAddition">
+								<div class="nb-spinner nb-spinner-sm spinner__white" data-bind="visible:adding()"></div>
+								Add
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-bind="modal:deleteChallengeModal,with:deleteChallengeModal" class="modal">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header" style="border:none;">
+							<button type="button" class="close cms-modal-close-button" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title inline-block"><i class="fa fa-folder"></i> Delete repository</h3>
+						</div>
+						<div class="modal-body" style="border:none;">
+							<h4>Are you sure you want to delete <span data-bind="text:name"></span> ?</h4>
+						</div>
+						<div class="modal-footer" style="border:none;">
+							<button class="btn btn-neutral" data-dismiss="modal">Close</button>
+							<button class="btn btn-danger" data-bind="enable:!deleting(),click:deleteMe">
+								<div class="nb-spinner nb-spinner-sm spinner__white" data-bind="visible:deleting()"></div>
+								Delete
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
+		<!-- End load sidebar -->
+		<!-- Load main content -->
+		<div class="page-content">
+			<div data-bind="page: { id: 'Challenge', role: 'start', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/page_content.html' }" id="dashboard_page">
+			</div>
+		</div>
+		<!-- End load main content -->
+	</div>
+</body>
+</html>
