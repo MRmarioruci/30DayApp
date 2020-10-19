@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>30DayApp</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel='stylesheet' type='text/css' media='screen' href='assets/css/login.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='assets/css/main.css'>
+</head>
+<body id="__body__" style="font-family:'Montserrat Alternates';">
+	<div class="login-wrap" style="display: block;">
+		<center>
+			<img src="assets/images/logo.png">
+		</center>
+		<br><br>
+		<div class="cont">
+			<div class="form sign-in">
+				<h2>Welcome back,</h2>
+				<label>
+					<span>Email</span>
+					<input type="email" data-bind="textInput:email" />
+				</label>
+				<label>
+					<span>Password</span>
+					<input type="password" data-bind="textInput:password" />
+				</label>
+				<div style="color:red;" data-bind="visible:loginError,text:loginError"></div>
+				<button type="button" class="submit" data-bind="click:_login">
+					<i class="fas fa-spinner fa-spin" data-bind="visible:loginLoading()"></i> Sign In
+				</button>
+			</div>
+			<div class="sub-cont">
+				<div class="img">
+					<div class="img__text m--up">
+						<h2 style="color:#fff;font-weight: bold;">New here?</h2>
+						<p>Sign up and start your journey towards self improvement!</p>
+					</div>
+					<div class="img__text m--in">
+						<h2 style="color:#fff;font-weight: bold;">One of us?</h2>
+						<p>If you already has an account, just sign in. We've missed you!</p>
+					</div>
+					<div class="img__btn">
+						<span class="m--up">Sign Up</span>
+						<span class="m--in">Sign In</span>
+					</div>
+				</div>
+				<div class="form sign-up">
+					<h2>Time to start improving,</h2>
+					<label>
+						<span>Name</span>
+						<input type="text" data-bind="textInput:newName" />
+					</label>
+					<label>
+						<span>Email</span>
+						<input type="email" data-bind="textInput:newEmail" />
+					</label>
+					<label>
+						<span>Password</span>
+						<input type="password" data-bind="textInput:newPassword" />
+					</label>
+					<label>
+						<span>Re-type Password</span>
+						<input type="password" data-bind="textInput:newPasswordRepeat" />
+					</label>
+					<p style="color:red;" data-bind="visible:registerError,text:registerError"></p>
+					<button class="submit" data-bind="click:_register">
+						<i class="fas fa-spinner fa-spin" data-bind="visible:registerLoading()"></i> Sign Up
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="position: absolute;bottom: 0;text-align: center;width: 100%;">
+		Made with <i class="fa fa-heart red0" style="color:red;"></i> by Mario Ruci
+	</div>
+</body>
+<script src="https://kit.fontawesome.com/4d40715e6f.js" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+	document.querySelector('.img__btn').addEventListener('click', function() {
+		document.querySelector('.cont').classList.toggle('s--signup');
+	});
+</script>
+</html>

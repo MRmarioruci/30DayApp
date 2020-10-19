@@ -1,0 +1,119 @@
+<!-- ko with:calendar-->
+<div class=" header__wide">
+    <div class="page__header-left" style="padding:0px;">
+        <i class="fa fa-calendar fa-2x"></i>
+        <div class="label label__bold fnt__15" style="display: inline-block;margin-top: 10px;">
+            <span data-bind="text:name"></span>
+        </div>
+    </div>
+    <div class="page__header-right">
+        <button class="btn btn-neutral fnt__19">
+            <i class="fa fa-search"></i>
+        </button>
+        <button class="btn btn-neutral fnt__19">
+            <i class="fa fa-cog"></i>
+        </button>
+        <button class="btn btn-neutral fnt__19">
+            <i class="fa fa-pencil"></i>
+        </button>
+    </div>
+</div>
+<div class="page-inner">
+    <div id="main-wrapper" style="background:#fff;overflow-y: auto;overflow-x: hidden;">
+        <div class="calendar-container">
+            <div class="calendar-container__body">
+                <div class="calendar-table">
+                    <div class="calendar-table__header">
+                        <div class="calendar-table__row">
+                            <div class="calendar-table__col">S</div>
+                            <div class="calendar-table__col">M</div>
+                            <div class="calendar-table__col">T</div>
+                            <div class="calendar-table__col">W</div>
+                            <div class="calendar-table__col">T</div>
+                            <div class="calendar-table__col">F</div>
+                            <div class="calendar-table__col">S</div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="calendar-table__body">
+                        <div class="calendar-table__row" data-bind="foreach:days">
+                            <div class="calendar-table__col" style="margin-top: 10px;" data-bind="click:editMe">
+                                <div class="calendar-table__item">
+									<span data-bind="text:order()+1"></span>
+                                    <br>
+                                    <div>
+                                        <!-- ko if:status() == 0-->
+                                        <div class="btn btn-danger" style="font-size: 12px;"  type="button">
+                                            Not complete
+                                        </div> 
+                                        <!-- /ko -->
+                                        <!-- ko if:status() == 1-->
+                                        <div class="btn btn-warning" style="font-size: 12px;"  type="button">
+                                            In progress
+                                        </div>
+                                        <!-- /ko -->
+                                        <!-- ko if:status() == 2-->
+                                        <div class="btn btn-success" style="font-size: 12px;"  type="button">
+                                            <i class="fa fa-check"></i>
+                                            Complete
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<div data-bind="modal:editModal,with:editModal" class="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <button type="button" class="close cms-modal-close-button" data-dismiss="modal">&times;</button>
+                <h2>Day <span data-bind="text:order()+1"></span></h2>
+            </div>
+            <div class="modal-body" style="border:none;">
+                <div data-bind="visible:!showSuccess()" class="animate__animated animate__fadeIn">
+                    <h4>Status</h4>
+                    <div class="form-group btn-group">
+                        <div class="btn btn-neutral" data-bind="css:{'btn-danger':status() == 0},style:{'color': status() == 0 ? '#fff' : ''},click:setStatus.bind($data,0)" style="font-size: 12px;"  type="button">
+                            Not complete
+                        </div>
+                        <div class="btn btn-neutral" data-bind="css:{'btn-warning':status() == 1},style:{'color': status() == 1 ? '#fff' : ''},click:setStatus.bind($data,1)" style="font-size: 12px;"  type="button">
+                            In progress
+                        </div>
+                        <div class="btn btn-neutral" data-bind="css:{'btn-success':status() == 2},style:{'color': status() == 2 ? '#fff' : ''},click:setStatus.bind($data,2)" style="font-size: 12px;"  type="button">
+                            <i class="fa fa-check"></i>
+                            Complete
+                        </div>
+                    </div>
+                    <h4>Activity</h4>
+                    <div data-bind="foreach:activities">
+                        <div data-bind="html:text"></div>
+                    </div>
+                    <div data-bind="visible:activities().length == 0">
+                        No activities added
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="form-control form__control-lg" data-bind="textEditor:newActivity" style="height: 90px;margin-bottom: 10px;position:relative;" placeholder="Add activity..."></div>
+                        <button class="btn btn-success pull-right" data-bind="click:addActivity">Add</button>
+                    </div>
+                </div>
+                <div data-bind="visible:showSuccess" class="text-center animate__animated animate__fadeIn">
+                    <h2>Congrats!</h2>
+                    <img src="assets/images/2542010.jpg" width="300">
+                    <h3>You've completed day no. <span data-bind="order()+1"></span></h3>
+                    <p style="font-size: 18px;"><b data-bind="text:remainingDays"></b> days remaining. Go hard, You can do it!</p>
+                </div>
+            </div>
+            <div class="modal-footer" >
+                <button class="btn btn-neutral" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>

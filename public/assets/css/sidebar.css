@@ -1,0 +1,9 @@
+.color__item{
+    width:30px;
+    height:30px;
+    display:inline-block;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.color__item:hover{border:2px solid #000;}
+.color__selected{border:2px solid #000;}

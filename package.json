@@ -1,0 +1,28 @@
+{
+  "name": "gitmanager",
+  "version": "1.0.0",
+  "description": "a personal git manager for tracking commits and seeing statistics",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Git",
+    "Manager"
+  ],
+  "author": "Mario Ruci",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "colors": "^1.4.0",
+    "connect-redis": "^4.0.4",
+    "ddos-express": "^0.1.7",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "gitlog": "^3.2.0",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7",
+    "redis": "^3.0.2"
+  }
+}
