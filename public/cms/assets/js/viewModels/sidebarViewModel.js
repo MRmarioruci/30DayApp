@@ -7,7 +7,23 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 		self.deleteChallengeModal = ko.observable(null);
 		self.searchTerm = ko.observable(null).extend({ throttle: 500 });
 		self.searchTerm.subscribe(function(newVal){
-			console.log(newVal);
+			if(newVal){
+				_getSidebarData(false, newVal)
+				.done(function(data){
+					var calendars = data.calendars;
+					self.calendars($.map(calendars,function(calendar){
+						return new Calendar(calendar);
+					}))
+				})
+			}else{
+				_getSidebarData(false, newVal)
+				.done(function(data){
+					var calendars = data.calendars;
+					self.calendars($.map(calendars,function(calendar){
+						return new Calendar(calendar);
+					}))
+				})
+			}
 		})
 
 		self.calendars = ko.observableArray([]);
@@ -41,7 +57,7 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 			})
 		}
 		self.getData = function(redirect_to_last){
-			_getSidebarData()
+			_getSidebarData(true, null)
 			.done(function(data){
 				var user = data.user_info;
 				var calendars = data.calendars;
@@ -91,26 +107,11 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 			})
 			return d;
 		}
-		function _getSidebarData(){
+		function _getSidebarData(getUserInfo, searchTerm){
 			var d = $.Deferred();
 			$.post('/getCalendars', {
-				'getUserInfo':true
-			})
-			.done(function (data) {
-				if (data) {
-					if (data.code == 1) {
-						d.resolve(data.data ? data.data : []);
-					} else {
-						d.reject();
-					}
-				}
-			})
-			return d;
-		}
-		function _deleteRepo(id){
-			var d = $.Deferred();
-			$.post('/deleteRepo', {
-				'id': id,
+				'getUserInfo': getUserInfo,
+				'searchTerm': searchTerm
 			})
 			.done(function (data) {
 				if (data) {

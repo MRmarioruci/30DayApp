@@ -32,23 +32,44 @@ module.exports = {
 			}
 		});
 	},
-	get:function(user_id,connection,cb){
-		var q = 'SELECT \
-		`Calendars`.`id`, \
-		`Calendars`.`name`, \
-		`Calendars`.`description`, \
-		`Calendars`.`creationDate`, \
-		`Calendars`.`color` \
-		FROM `Calendars` \
-		JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
-		WHERE `Users`.`id` = ?';
-		connection.query(q,[user_id] ,function(err, rows, fields) {
-			if (!err){
-				cb(null,rows);
-			}else{
-				cb('Err',null);
-			}
-		});
+	get:function(user_id, searchTerm, connection,cb){
+		if(searchTerm){
+			let q = 'SELECT \
+				`Calendars`.`id`, \
+				`Calendars`.`name`, \
+				`Calendars`.`description`, \
+				`Calendars`.`creationDate`, \
+				`Calendars`.`color` \
+			FROM `Calendars` \
+			JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
+			WHERE `Users`.`id` = ? \
+			AND `Calendars`.`name` LIKE ? \
+			OR `Calendars`.`description` LIKE ?';
+			connection.query(q,[user_id, searchTerm, searchTerm] ,function(err, rows, fields) {
+				if (!err){
+					cb(null,rows);
+				}else{
+					cb('Err',null);
+				}
+			});
+		}else{
+			let q = 'SELECT \
+				`Calendars`.`id`, \
+				`Calendars`.`name`, \
+				`Calendars`.`description`, \
+				`Calendars`.`creationDate`, \
+				`Calendars`.`color` \
+			FROM `Calendars` \
+			JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
+			WHERE `Users`.`id` = ?';
+			connection.query(q,[user_id] ,function(err, rows, fields) {
+				if (!err){
+					cb(null,rows);
+				}else{
+					cb('Err',null);
+				}
+			});
+		}
 	},
 	delete:function(id,user_id,connection,cb){
 		var q = 'DELETE FROM `Calendars` \

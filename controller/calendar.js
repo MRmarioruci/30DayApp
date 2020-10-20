@@ -35,7 +35,8 @@ module.exports = {
 				user.getUserId(req.session.email,connection,function(err,response){
 					if(response){
 						let user_id = response.id;
-						calendarModel.get(user_id,connection, function(err, response){
+						let searchTerm = request.searchTerm;
+						calendarModel.get(user_id, searchTerm, connection, function(err, response){
 							if(!err){
 								if(request.getUserInfo){
 									user.getUserInfo(user_id,connection,function(error,user_info){
@@ -46,7 +47,7 @@ module.exports = {
 										}
 									});
 								}else{
-									res.json({'code':1,'data':response});
+									res.json({'code':1,'data':{'calendars':response}});
 								}
 							}else{
 								res.json(error.getError('QUERY'));

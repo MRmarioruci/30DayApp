@@ -76,7 +76,7 @@
 										<i class="fa fa-plus"></i> Create new challenge
 									</button>
 								</div>
-								<ul class="accordion-menu" style="height: 70vh;overflow-y: auto;" data-bind="foreach:calendars">
+								<ul class="accordion-menu" style="height: 70vh;overflow-y: auto;" data-bind="foreach:calendars, visible: calendars().length > 0">
 									<!-- active-page -->
 									<li  class="pointer">
 										<a data-bind="style:{'border-left':'2px solid '+color(),'background':isCurrent() ? '#fff' : ''},page-href: 'Challenge?id='+id" style="padding:7px;margin-left:10px;height:100px;background:#fff;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow:hidden;border-radius: 10px;padding:5px;margin:10px;">
@@ -96,6 +96,16 @@
 										</a>
 									</li>
 								</ul>
+								<div data-bind="visible: (calendars().length == 0) && searchTerm()" class="text-center">
+									<img src="assets/images/undraw_walking_outside_5ueb.svg" style="width:300px; max-width: 100%;">
+									<br>
+									<h4>No results</h4>
+								</div>
+								<div data-bind="visible: (calendars().length == 0) && !searchTerm()" class="text-center">
+									<img src="assets/images/undraw_personal_trainer_ote3.svg" style="width:300px; max-width: 100%;">
+									<br>
+									<h4>Add your first challenge</h4>
+								</div>
 							</div>
 						</div>
 						<a style="position: absolute;bottom: 0;width:100%;height:50px;border-top:1px dashed #ccc;padding:5px;" href="/logout">
