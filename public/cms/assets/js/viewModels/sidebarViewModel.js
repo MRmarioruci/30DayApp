@@ -16,7 +16,7 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 					}))
 				})
 			}else{
-				_getSidebarData(false, newVal)
+				_getSidebarData(false, null)
 				.done(function(data){
 					var calendars = data.calendars;
 					self.calendars($.map(calendars,function(calendar){

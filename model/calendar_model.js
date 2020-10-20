@@ -34,6 +34,7 @@ module.exports = {
 	},
 	get:function(user_id, searchTerm, connection,cb){
 		if(searchTerm){
+			searchTerm = searchTerm+'%';
 			let q = 'SELECT \
 				`Calendars`.`id`, \
 				`Calendars`.`name`, \
