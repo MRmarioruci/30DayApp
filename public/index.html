@@ -6,6 +6,7 @@
 	<title>30DayApp</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel='stylesheet' type='text/css' media='screen' href='assets/css/login.css'>
 	<link rel='stylesheet' type='text/css' media='screen' href='assets/css/main.css'>
@@ -21,11 +22,11 @@
 				<h2>Welcome back,</h2>
 				<label>
 					<span>Email</span>
-					<input type="email" data-bind="textInput:email" />
+					<input type="email" placeholder="Type here..." data-bind="textInput:email" />
 				</label>
 				<label>
 					<span>Password</span>
-					<input type="password" data-bind="textInput:password" />
+					<input type="password" placeholder="Type here..." data-bind="textInput:password" />
 				</label>
 				<div style="color:red;" data-bind="visible:loginError,text:loginError"></div>
 				<button type="button" class="submit" data-bind="click:_login">
@@ -40,7 +41,7 @@
 					</div>
 					<div class="img__text m--in">
 						<h2 style="color:#fff;font-weight: bold;">One of us?</h2>
-						<p>If you already has an account, just sign in. We've missed you!</p>
+						<p>If you already have an account, just sign in. We've missed you!</p>
 					</div>
 					<div class="img__btn">
 						<span class="m--up">Sign Up</span>
@@ -51,19 +52,19 @@
 					<h2>Time to start improving,</h2>
 					<label>
 						<span>Name</span>
-						<input type="text" data-bind="textInput:newName" />
+						<input type="text" placeholder="Type here..." data-bind="textInput:newName" />
 					</label>
 					<label>
 						<span>Email</span>
-						<input type="email" data-bind="textInput:newEmail" />
+						<input type="email" placeholder="Type here..." data-bind="textInput:newEmail" />
 					</label>
 					<label>
 						<span>Password</span>
-						<input type="password" data-bind="textInput:newPassword" />
+						<input type="password" placeholder="Type here..." data-bind="textInput:newPassword" />
 					</label>
 					<label>
 						<span>Re-type Password</span>
-						<input type="password" data-bind="textInput:newPasswordRepeat" />
+						<input type="password" placeholder="Type here..." data-bind="textInput:newPasswordRepeat" />
 					</label>
 					<p style="color:red;" data-bind="visible:registerError,text:registerError"></p>
 					<button class="submit" data-bind="click:_register">
@@ -73,8 +74,8 @@
 			</div>
 		</div>
 	</div>
-	<div style="position: absolute;bottom: 0;text-align: center;width: 100%;">
-		Made with <i class="fa fa-heart red0" style="color:red;"></i> by Mario Ruci
+	<div style="position: absolute;bottom: 0;text-align: center;width: 100%;font-size: 17px;">
+		Made by <a href="mailto: 'marioruci15@gmail.com'">Mario Ruci</a> <i class="fas fa-user-ninja" style="font-size: 20px;"></i>
 	</div>
 </body>
 <script src="https://kit.fontawesome.com/4d40715e6f.js" crossorigin="anonymous"></script>

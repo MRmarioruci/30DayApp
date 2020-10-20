@@ -13,7 +13,7 @@ function indexViewModel() {
 	self.newPasswordRepeat = ko.observable(null);
 	self.registerLoading = ko.observable(false);
 	self.registerError = ko.observable(null);
-	
+
 	self._login = function(){
 		/** Input checks */
 		if( !self.email() && !self.password() ){
@@ -29,10 +29,15 @@ function indexViewModel() {
 		self.loginLoading(true);
 		login()
 		.done(function(data){
-			window.location.href = "/cms/#Dashboard";
+			if(data.status != 'err'){
+				self.email(null);
+				window.location.href = "/cms/#Dashboard";
+			}else{
+				self.loginError('Wrong email or password!');
+			}
 		})
 		.fail(function(data){
-			
+			self.loginError('Login errror!');
 		})
 		.always(function(data){
 			self.loginLoading(false);
@@ -55,19 +60,38 @@ function indexViewModel() {
 		}else{
 			self.registerError(null);
 		}
-		
+		self.registerLoading(true);
 		register()
 		.done(function(data){
-			window.location.href = "/cms";
+			if(data.status != 'err'){
+				window.location.href = "/cms";
+				self.newEmail(null);
+				self.newPassword(null);
+				self.newPasswordRepeat(null);
+				self.newName(null);
+				self.registerError(null);
+			}else{
+				self.registerError('Registration error!');
+			}
 		})
 		.fail(function(data){
-			
+			self.registerError('Registration error!');
 		})
 		.always(function(data){
-			
+			self.registerLoading(false);
 		})
 	}
-	
+	$('body').keypress(function (e) {
+		var key = e.which;
+		if(key == 13){
+			if(self.email()){
+				self._login();
+			}else{
+				self._register();
+			}
+			return false;
+		}
+	});
 	function register() {
 		var d = $.Deferred();
 		var o = {

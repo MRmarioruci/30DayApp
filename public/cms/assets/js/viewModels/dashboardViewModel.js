@@ -5,7 +5,7 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
         self.editModal = ko.observable(null);
         self.daysRemaining = ko.observable(10);
         self.id = ko.observable();
-        var sidebar = new sidebarViewModel();
+		var sidebar = sidebarViewModel;
 
         self.id.subscribe(function(newv){
             self.getData();

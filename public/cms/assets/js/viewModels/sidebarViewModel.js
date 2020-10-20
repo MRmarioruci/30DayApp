@@ -1,10 +1,14 @@
 define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, moment) {
-	return function sidebarViewModel() {
+	return new function sidebarViewModel() {
 		var self = this;
 		self.currentPage = ko.observable('Dashboard');
 		self.user_name = ko.observable('Mario Ruci');
 		self.addChallengeModal = ko.observable(null);
 		self.deleteChallengeModal = ko.observable(null);
+		self.searchTerm = ko.observable(null).extend({ throttle: 500 });
+		self.searchTerm.subscribe(function(newVal){
+			console.log(newVal);
+		})
 
 		self.calendars = ko.observableArray([]);
 

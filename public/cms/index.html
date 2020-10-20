@@ -4,7 +4,7 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<title>Chatty</title>
+	<title>30DayApp</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link href="https://fonts.googleapis.com/css2?family=Bellota:wght@700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
 								<div class="menu__block">
 									<div class="d-flex justify-content-center h-100">
 										<div class="searchbar">
-											<input class="search_input" type="text" name="" placeholder="Search...">
+											<input class="search_input" type="text" name="" data-bind="textInput: searchTerm" placeholder="Search...">
 											<a href="#" class="search_icon"><i class="fa fa-search"></i></a>
 										</div>
 									</div>
@@ -79,7 +79,7 @@
 								<ul class="accordion-menu" style="height: 70vh;overflow-y: auto;" data-bind="foreach:calendars">
 									<!-- active-page -->
 									<li  class="pointer">
-										<a data-bind="style:{'border-left':'2px solid '+color(),'background':isCurrent ? '#F9F9F9' : ''},page-href: 'Challenge?id='+id" style="padding:7px;margin-left:10px;height:100px;background:#fff;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow:hidden;border-radius: 10px;padding:5px;margin:10px;">
+										<a data-bind="style:{'border-left':'2px solid '+color(),'background':isCurrent() ? '#fff' : ''},page-href: 'Challenge?id='+id" style="padding:7px;margin-left:10px;height:100px;background:#fff;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);overflow:hidden;border-radius: 10px;padding:5px;margin:10px;">
 											<div class="row">
 												<div class="col-sm-2">
 													<img src="assets/images/calendar.png" style="width:30px;height:30px;padding:0px;border-radius: 5px;display: inline-block;float:left; ">
@@ -186,7 +186,7 @@
 		<!-- End load sidebar -->
 		<!-- Load main content -->
 		<div class="page-content">
-			<div data-bind="page: { id: 'Challenge', role: 'start', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/page_content.html' }" id="dashboard_page">
+			<div data-bind="page: { id: 'Challenge', role: 'start', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/main.html' }" id="dashboard_page">
 			</div>
 		</div>
 		<!-- End load main content -->

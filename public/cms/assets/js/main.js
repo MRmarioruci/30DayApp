@@ -13,9 +13,6 @@ require.config({
 		'masterViewModel': 'viewModels/masterViewModel',
 		'dashboardViewModel': 'viewModels/dashboardViewModel',
 		'sidebarViewModel': 'viewModels/sidebarViewModel',
-		'repositoryViewModel': 'viewModels/repositoryViewModel',
-		'commitsViewModel': 'viewModels/commitsViewModel',
-		'tasksViewModel': 'viewModels/tasksViewModel',
 		/*Components*/
 
 		/*Binding handlers*/
