@@ -1103,8 +1103,8 @@ blockquote {
 }
 
 .btn-info {
-	border-color: #388FF5!important;
-	background-color: #388FF5!important;
+	border-color: #f26396!important;
+	background-color: #f26396!important;
 	transition: all .2s ease-in-out
 }
 
@@ -1115,8 +1115,8 @@ blockquote {
 }
 
 .btn-info.active.focus,.btn-info.active:focus,.btn-info.active:hover,.btn-info.focus,.btn-info:active.focus,.btn-info:active:focus,.btn-info:active:hover,.btn-info:focus,.btn-info:hover,.open>.dropdown-toggle.btn-info.focus,.open>.dropdown-toggle.btn-info:focus,.open>.dropdown-toggle.btn-info:hover {
-	border-color: #388FF5!important;
-	background-color: #388FF5!important
+	border-color: #f26396!important;
+	background-color: #f26396!important
 }
 
 .btn-warning {
@@ -3183,7 +3183,7 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 .btn-neutral:hover{
 	background:rgba(126, 126, 126, 0.05);
 	border:2px solid #000;
-	color:#388FF5;
+	color:#f26396;
 	-webkit-appearance:button;
 }
 
@@ -3225,7 +3225,7 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 .label__link{
 	font-family: 'Balsamiq Sans', cursive;
 	font-weight: 600;
-	color:#388FF5;
+	color:#f26396;
 }
 .label__muted{
 	font-family: 'Balsamiq Sans', cursive;
@@ -3237,4 +3237,29 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 }
 .ck-balloon-panel{
 	z-index:  10000000 !important;
+}
+/*TABS*/
+.nav-tabs { border-bottom: 0px solid #DDD;}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover { border-width: 0;}
+.nav-tabs > li > a { border: none; color: rgb(32, 69, 94); padding: 15px !important;}
+.nav-tabs > li.active > a,
+.nav-tabs > li > a:hover { border: none; background: #F2F2F2;cursor: pointer !important; border-radius: 10px;; }
+.nav-tabs > li > a::after { content: "";  height: 4px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+.nav-tabs > li.active > a::after { content: ""; background: #4285F4;,height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+.nav-tabs > li.active > a { border: none; color: #4285F4;background:transparent;font-weight: 800;}
+.nav-tabs > li.active > a::after,
+.nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:10px}
+@media only screen and (max-width: 600px) {
+	.nav-tabs > li{
+		width: 50%;
+	}
+	.nav-tabs > li > a{
+		font-size: 14px;
+		text-align: center;
+	}
 }

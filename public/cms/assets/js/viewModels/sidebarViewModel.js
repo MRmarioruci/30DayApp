@@ -5,6 +5,10 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 		self.user_name = ko.observable('Mario Ruci');
 		self.addChallengeModal = ko.observable(null);
 		self.deleteChallengeModal = ko.observable(null);
+		self.isSmall = ko.observable(false);
+		self.toggleSidebar = function(){
+			self.isSmall(!self.isSmall());
+		}
 		self.searchTerm = ko.observable(null).extend({ throttle: 500 });
 		self.searchTerm.subscribe(function(newVal){
 			if(newVal){

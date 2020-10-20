@@ -46,15 +46,16 @@
 		<!-- Load sidebar -->
 		<div id="sidebar__container">
 			<!-- ko with:sidebarViewModel-->
-			<div class="page-sidebar">
+			<div class="page-sidebar" data-bind="style:{'width': isSmall() ? '50px' : ''}" style="overflow-x: hidden;position: relative;">
 				<div style="position: fixed;width: 500px;">
 					<a class="logo-box" href="index.html" style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);padding:4px;padding-left: 15px;">
 						<img src="assets/images/avatar.png" style="width:60px;height:60px;border:2px solid #388FF5;padding:0px;border-radius: 50%;display: inline-block;float:left;">
 						<div style="display: inline-block;margin-left: 20px;" class="mt10">
 							<div class="label__link" data-bind="text:user_name"></div>
 						</div>
-						<button class="btn-neutral pull-right" style="margin-top: 10px;">
-							<i class="fa fa-sliders fnt__25"></i>
+						<button class="btn-neutral pull-right" data-bind="click: toggleSidebar" style="margin-top: 10px;">
+							<i class="fa fa-chevron-left fnt__25" data-bind="visible: !isSmall()"></i>
+							<i class="fa fa-chevron-right fnt__25" data-bind="visible: isSmall"></i>
 						</button>
 						<i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
 						<i class="icon-close" id="sidebar-toggle-button-close"></i>
