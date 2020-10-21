@@ -5,6 +5,7 @@ function indexViewModel() {
 	self.password = ko.observable(null);
 	self.loginError = ko.observable(null);
 	self.loginLoading = ko.observable(false);
+	self.isLoggedIn = ko.observable(false);
 	
 	//Register observables
 	self.newName = ko.observable(null);
@@ -135,6 +136,27 @@ function indexViewModel() {
 		});
 		return d;
 	}
+	function isLoggedIn(){
+		var d = $.Deferred();
+		var o = {};
+		$.post( '/isLoggedIn', o)
+		.done(function( data ){
+			if(data.status=='ok'){
+				self.isLoggedIn(data.data);
+				d.resolve(data.data);
+			}else if(data.status=='log'){
+				d.reject();
+			}else{
+				d.reject();
+			}
+		})
+		.fail(function () {
+			self.isLoggedIn(false);
+			d.reject();
+		});
+		return d;
+	}
+	isLoggedIn();
 }
 if(document.getElementById('__body__'))ko.applyBindings( new indexViewModel(), document.getElementById('__body__') );
 else if(console && console.log ) console.log('non existant page');

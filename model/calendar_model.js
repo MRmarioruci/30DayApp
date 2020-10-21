@@ -19,8 +19,8 @@ module.exports = {
 		});
 	},
 	addDay:function(calendar_id,order,connection,cb){
-		var q = 'INSERT INTO `Days`(`calendar_id`,`order`) VALUES(?,?)';
-		connection.query(q,[calendar_id,order] ,function(err, rows, fields) {
+		var q = 'INSERT INTO `Days`(`calendar_id`,`order`, `date`) VALUES(?,?, now() + interval ? day)';
+		connection.query(q,[calendar_id,order, order] ,function(err, rows, fields) {
 			if (!err){
 				if(rows){
 					cb(null,rows.insertId);
@@ -99,6 +99,7 @@ module.exports = {
 		`Days`.`id` AS `day_id`, \
 		`Days`.`order`, \
 		`Days`.`status`, \
+		`Days`.`date`, \
 		`DayActivities`.`id` AS `da_id`, \
 		`DayActivities`.`text` \
 		FROM `Calendars` \
@@ -132,6 +133,7 @@ module.exports = {
 							'id':row.day_id,
 							'order':row.order,
 							'status':row.status,
+							'date':row.date,
 							'activities':[]
 						})
 						j = 0;

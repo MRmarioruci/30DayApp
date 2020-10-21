@@ -20,14 +20,38 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
             .done(function(data){
                 self.calendar(new Calendar(data[0]));
             })
-        }
+		}
         function Calendar(data){
 			var ca = this;
 			ca.id = data.id;
             ca.name = ko.observable(data.name);
 			ca.description = ko.observable(data.description);
 			ca.creationDate = ko.observable(data.creationDate ? moment(data.creationDate).format('MMMM Do YYYY, h:mm:ss a') : null);
-            ca.color = ko.observable(data.color);
+			ca.color = ko.observable(data.color);
+			ca.incomplete = ko.pureComputed(function(){
+				var days = ca.days();
+				var i = 0;
+				ko.utils.arrayFilter(days, function(day){
+					if(day.status() == 0) i++;
+				})
+				return i;
+			})
+			ca.inprogress = ko.pureComputed(function(){
+				var days = ca.days();
+				var i = 0;
+				ko.utils.arrayFilter(days, function(day){
+					if(day.status() == 1) i++;
+				})
+				return i;
+			})
+			ca.complete = ko.pureComputed(function(){
+				var days = ca.days();
+				var i = 0;
+				ko.utils.arrayFilter(days, function(day){
+					if(day.status() == 2) i++;
+				})
+				return i;
+			})
             ca.days = ko.observableArray($.map(data.days,function(day){
                 return new Day(day,ca);
             }))
@@ -36,6 +60,7 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
             var day = this;
             day.id = data.id;
             day.order = ko.observable(data.order);
+			day.date = ko.observable(data.date ?  moment(data.date).format('MMMM Do YYYY') : null);
             day.activities = ko.observableArray($.map(data.activities,function(activity){
                 return new Activity(activity,day);
             }));

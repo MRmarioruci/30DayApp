@@ -278,3 +278,15 @@ header {
     opacity: 0.5 !important;
     pointer-events: none !important;
 }
+.day__complete{
+	border: 2px solid #63CB89;
+	border-radius: 4px;
+}
+.day__incomplete{
+	border: 2px solid #ec5e69;
+	border-radius: 4px;
+}
+.day__inprogress{
+	border: 2px solid #f1c205;
+	border-radius: 4px;
+}

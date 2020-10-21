@@ -89,6 +89,13 @@ router.all('/login',(req,res) => {
         }
     });
 });
+router.all('/isLoggedIn',(req,res) => {
+    if(req.session.email){
+		res.json({'status':'ok','data':true});
+	}else{
+		res.json({'status':'ok','data':false});
+	}
+});
 
 app.use('/', router);
 app.use(express.static(path.join(__dirname, 'public')));

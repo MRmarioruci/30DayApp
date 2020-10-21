@@ -7,12 +7,6 @@
 		</div>
 	</div>
 	<div class="page__header-right">
-		<button class="btn btn-neutral fnt__17">
-			<i class="fa fa-calendar"></i> Calendar
-		</button>
-		<button class="btn btn-neutral fnt__17">
-			<i class="fa fa-cog"></i> Stats
-		</button>
 		<button class="btn btn-danger fnt__17">
 			<i class="fa fa-trash"></i> Delete
 		</button>
@@ -23,22 +17,46 @@
 		<div class="calendar-container">
 			<div class="calendar-container__body">
 				<div class="calendar-table">
-					<div class="calendar-table__header">
-						<div class="calendar-table__row">
-							<div class="calendar-table__col">S</div>
-							<div class="calendar-table__col">M</div>
-							<div class="calendar-table__col">T</div>
-							<div class="calendar-table__col">W</div>
-							<div class="calendar-table__col">T</div>
-							<div class="calendar-table__col">F</div>
-							<div class="calendar-table__col">S</div>
+					<div class="row">
+						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
+							<div style="width: 100%;">
+								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+									<h4 style="font-size: 27px;" data-bind="text: incomplete"></h4>
+									<div class="fnt__22">Incomplete</div>
+								</div>
+								<div style="width:30%;display: inline-block;">
+									<img src="assets/images/undraw_Notify_re_65on.svg" style="width:100%;margin-top: -20px;">
+								</div>
+							</div>
+						</div>
+						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
+							<div style="width: 100%;">
+								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+									<h4 style="font-size: 27px;" data-bind="text: inprogress"></h4>
+									<div class="fnt__22">In progress</div>
+								</div>
+								<div style="width:30%;display: inline-block;">
+									<img src="assets/images/undraw_Jogging_t14q.svg" style="width:100%;margin-top: -20px;">
+								</div>
+							</div>
+						</div>
+						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
+							<div style="width: 100%;">
+								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+									<h4 style="font-size: 27px;" data-bind="text: complete"></h4>
+									<div class="fnt__22">Complete</div>
+								</div>
+								<div style="width:30%;display: inline-block;">
+									<img src="assets/images/undraw_completed_ngx6.svg" style="width:100%;margin-top: -20px;">
+								</div>
+							</div>
 						</div>
 					</div>
 					<br><br>
 					<div class="calendar-table__body">
 						<div class="calendar-table__row" data-bind="foreach:days">
-							<div class="calendar-table__col" style="margin-top: 10px;" data-bind="click:editMe">
-								<div class="calendar-table__item">
+							<div class="calendar-table__col" style="margin-top: 10px;" data-bind="click:editMe, css:{'day__complete': status() == 2, 'day__incomplete': status() == 0, 'day__inprogress': status() == 1}">
+								<div class="calendar-table__item" style="position: relative;">
 									<span data-bind="text:order()+1"></span>
 									<br>
 									<div>
@@ -58,6 +76,8 @@
 											Complete
 										</div>
 										<!-- /ko -->
+									</div>
+									<div style="position:absolute; bottom:5px;width:100%;" class="text-center text-muted" data-bind="text: date">
 									</div>
 								</div>
 							</div>
@@ -95,13 +115,20 @@
 					<div data-bind="foreach:activities">
 						<div data-bind="html:text"></div>
 					</div>
-					<div data-bind="visible:activities().length == 0">
-						No activities added
+					<div data-bind="visible:activities().length == 0" class="text-center">
+						<img src="assets/images/undraw_activity_tracker_1l9o.svg" style="width:100px;">
+						<br>
+						<h4>No activities added</h4>
 					</div>
 					<br>
 					<div class="form-group">
-						<div class="form-control form__control-lg" data-bind="textEditor:newActivity" style="height: 90px;margin-bottom: 10px;position:relative;" placeholder="Add activity..."></div>
-						<button class="btn btn-success pull-right" data-bind="click:addActivity">Add</button>
+						<label>Add activity</label>
+						<div class="form-control form__control-lg" data-bind="textEditor:newActivity" style="height: 90px;margin-bottom: 10px;position:relative;border: 1px solid #eee;" placeholder="Add activity...">
+						</div>
+						<button class="btn btn-success" data-bind="click:addActivity">
+							<i class="fa fa-plus"></i>
+							Add
+						</button>
 					</div>
 				</div>
 				<div data-bind="visible:showSuccess" class="text-center animate__animated animate__fadeIn">
@@ -112,7 +139,7 @@
 				</div>
 			</div>
 			<div class="modal-footer" >
-				<button class="btn btn-neutral" data-dismiss="modal">Done</button>
+				<button class="btn btn-neutral" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
