@@ -91,6 +91,15 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 			ca.creationDate = ko.observable(data.creationDate ? moment(data.creationDate).format('MMMM Do YYYY, h:mm:ss a') : null);
 			ca.color = ko.observable(data.color);
 			ca.isCurrent = ko.observable(false);
+			ca.initDelete = function(){
+				self.deleteChallengeModal(ca);
+			}
+			ca.deleteMe = function(){
+				_deleteChallenge(ca.id)
+				.done(function(d){
+					if(d) self.calendars.remove(ca);
+				})
+			}
 		}
 		function _addChallenge(){
 			var d = $.Deferred();
@@ -116,6 +125,22 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 			$.post('/getCalendars', {
 				'getUserInfo': getUserInfo,
 				'searchTerm': searchTerm
+			})
+			.done(function (data) {
+				if (data) {
+					if (data.code == 1) {
+						d.resolve(data.data ? data.data : []);
+					} else {
+						d.reject();
+					}
+				}
+			})
+			return d;
+		}
+		function _deleteChallenge(challenge_id){
+			var d = $.Deferred();
+			$.post('/deleteChallenge', {
+				'challenge_id': challenge_id,
 			})
 			.done(function (data) {
 				if (data) {

@@ -64,25 +64,29 @@ module.exports = {
 		router.post('/deleteChallenge',(req,res) => {
 			let request = req.body;
 			if(req.session.email) {
-				if(request.id){
+				if(request.challenge_id){
 					user.getUserId(req.session.email,connection,function(err,response){
 						if(response){
-							calendarModel.delete(request.id,response.id,connection, function(err, response){
+							calendarModel.delete(request.challenge_id, response.id, connection, function(err, response){
 								if(!err){
-									logger.log('info', 'Repo deleted');
+									logger.log('info', 'Challenge deleted');
 									res.json({'code':1,'data':response});
 								}else{
+									logger.log('error', error.getError('QUERY'));
 									res.json(error.getError('QUERY'));
 								}
 							})
 						}else{
+							logger.log('error', error.getError('QUERY'));
 							res.json(error.getError('QUERY'));
 						}
 					})
 				}else{
+					logger.log('error', error.getError('INVALID_PARAMS'));
 					res.json(error.getError('INVALID_PARAMS'));
 				}
 			}else{
+				logger.log('error', error.getError('NOT_LOGGED'));
 				res.json(error.getError('NOT_LOGGED'));
 			}
 		}),

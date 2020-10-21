@@ -1,3 +1,8 @@
+<!-- ko ifnot:calendar-->
+	<div style="width: 340px;margin: auto;border:4px solid #F9F9F9;border-radius: 13px;padding:20px;text-align:center;margin-top:40vh;">
+		<img src="assets/images/logo.png" class="img-responsive">
+	</div>
+<!-- /ko -->
 <!-- ko with:calendar-->
 <div class=" header__wide">
 	<div class="page__header-left" style="padding:0px;">
@@ -7,9 +12,6 @@
 		</div>
 	</div>
 	<div class="page__header-right">
-		<button class="btn btn-danger fnt__17">
-			<i class="fa fa-trash"></i> Delete
-		</button>
 	</div>
 </div>
 <div class="page-inner">
@@ -21,7 +23,9 @@
 						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
 							<div style="width: 100%;">
 								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
-									<h4 style="font-size: 27px;" data-bind="text: incomplete"></h4>
+									<h4 style="font-size: 27px;">
+										<span data-bind="text: incomplete"></span>%
+									</h4>
 									<div class="fnt__22">Incomplete</div>
 								</div>
 								<div style="width:30%;display: inline-block;">
@@ -32,7 +36,9 @@
 						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
 							<div style="width: 100%;">
 								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
-									<h4 style="font-size: 27px;" data-bind="text: inprogress"></h4>
+									<h4 style="font-size: 27px;">
+										<span data-bind="text: inprogress"></span>%
+									</h4>
 									<div class="fnt__22">In progress</div>
 								</div>
 								<div style="width:30%;display: inline-block;">
@@ -43,7 +49,9 @@
 						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
 							<div style="width: 100%;">
 								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
-									<h4 style="font-size: 27px;" data-bind="text: complete"></h4>
+									<h4 style="font-size: 27px;">
+										<span data-bind="text: complete"></span>%
+									</h4>
 									<div class="fnt__22">Complete</div>
 								</div>
 								<div style="width:30%;display: inline-block;">
@@ -89,6 +97,9 @@
 	</div>
 </div>
 <!-- /ko -->
+<div style="position: fixed;bottom: 0;right:10px;text-align: center;font-size: 17px;background:#fff;border-radius: 5px;padding:5px;">
+	© 2020 <b>30DayApp</b>. All Rights Reserved.
+</div>
 <div data-bind="modal:editModal,with:editModal" class="modal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

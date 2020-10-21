@@ -13,7 +13,7 @@
 }
 
 body,html {
-	font-size: 14px;
+	font-size: 15px;
 	width: 100%;
 	height: 100%;
 	font-family: 'Balsamiq Sans', cursive;
@@ -50,7 +50,7 @@ a:active,a:focus,a:hover {
 	outline: 0!important;
 	text-decoration: none!important
 }
-
+b{font-weight: bold; color:#000;}
 .btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus,.dataTables_wrapper .dataTables_filter input:focus {
 	outline: 0;
 	outline-offset: 0

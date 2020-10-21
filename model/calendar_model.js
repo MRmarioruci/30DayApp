@@ -74,8 +74,7 @@ module.exports = {
 	},
 	delete:function(id,user_id,connection,cb){
 		var q = 'DELETE FROM `Calendars` \
-		JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
-		WHERE `Calendars`.`id` = ? AND `Users`.`id` = ?';
+		WHERE `Calendars`.`id` = ? AND `Calendars`.`user_id` = ?';
 		connection.query(q,[id,user_id] ,function(err, rows, fields) {
 			if (!err){
 				if(rows){

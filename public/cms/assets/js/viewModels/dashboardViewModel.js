@@ -1,12 +1,12 @@
 define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko, $,moment,sidebarViewModel) {
     return function dashboardViewModel() {
-        var self = this;
+		var self = this;
         self.calendar = ko.observable(null);
-        self.editModal = ko.observable(null);
+		self.editModal = ko.observable(null);
+		self.deleteCalendarModal = ko.observable(null);
         self.daysRemaining = ko.observable(10);
         self.id = ko.observable();
 		var sidebar = sidebarViewModel;
-
         self.id.subscribe(function(newv){
             self.getData();
             sidebar.setCurrent(newv);
@@ -19,7 +19,7 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
             _getData()
             .done(function(data){
                 self.calendar(new Calendar(data[0]));
-            })
+			})
 		}
         function Calendar(data){
 			var ca = this;
@@ -34,7 +34,8 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 				ko.utils.arrayFilter(days, function(day){
 					if(day.status() == 0) i++;
 				})
-				return i;
+				var res = (i / days.length) * 100;
+				return res.toFixed(2);
 			})
 			ca.inprogress = ko.pureComputed(function(){
 				var days = ca.days();
@@ -42,7 +43,8 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 				ko.utils.arrayFilter(days, function(day){
 					if(day.status() == 1) i++;
 				})
-				return i;
+				var res = (i / days.length) * 100;
+				return res.toFixed(2);
 			})
 			ca.complete = ko.pureComputed(function(){
 				var days = ca.days();
@@ -50,11 +52,12 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 				ko.utils.arrayFilter(days, function(day){
 					if(day.status() == 2) i++;
 				})
-				return i;
+				var res = (i / days.length) * 100;
+				return res.toFixed(2);
 			})
             ca.days = ko.observableArray($.map(data.days,function(day){
                 return new Day(day,ca);
-            }))
+			}))
         }
         function Day(data,parent){
             var day = this;

@@ -126,40 +126,18 @@ header {
     padding: 12px 3px;
     text-align: center;
     text-transform: uppercase;
-    width: 40px;
-    height: 38px;
+    width: 180px;
+	display: inline-block;
+	text-align: center;
+	height: 96px;
     margin-top: 20px;
 }
-@media (min-width: 360px) {
-    .calendar-table__header .calendar-table__col {
-        width: 46px;
-    }
-}
-@media (min-width: 410px) {
-    .calendar-table__header .calendar-table__col {
-        width: 13.5%;
-        display: inline-block;
-        text-align: center;
-    }
-}
 .calendar-table__body .calendar-table__col {
-    width: 40px;
-    height: 42px;
+    width: 180px;
+	display: inline-block;
+	text-align: center;
+	height: 96px;
     padding-bottom: 2px;
-}
-@media (min-width: 360px) {
-    .calendar-table__body .calendar-table__col {
-        width: 46px;
-        height: 48px;
-    }
-}
-@media (min-width: 410px) {
-    .calendar-table__body .calendar-table__col {
-        width: 13.5%;
-        display: inline-block;
-        text-align: center;
-        height: 96px;
-    }
 }
 .calendar-table__today .calendar-table__item {
     border-color: #fefefe;
