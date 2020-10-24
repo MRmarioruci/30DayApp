@@ -23,7 +23,7 @@ define(['knockout', 'ckeditor'], function (ko, InlineEditor) {
 					if(newVal){
 						if( editor.getData() != newVal ) editor.setData(newVal);
 					}else{
-						editor.setData(null);
+						editor.setData('');
 					}
 				}
 			});

@@ -34,7 +34,7 @@ module.exports = {
 	},
 	get:function(user_id, searchTerm, connection,cb){
 		if(searchTerm){
-			searchTerm = searchTerm+'%';
+			searchTerm = '%'+searchTerm+'%';
 			let q = 'SELECT \
 				`Calendars`.`id`, \
 				`Calendars`.`name`, \
@@ -44,8 +44,7 @@ module.exports = {
 			FROM `Calendars` \
 			JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
 			WHERE `Users`.`id` = ? \
-			AND `Calendars`.`name` LIKE ? \
-			OR `Calendars`.`description` LIKE ?';
+			AND (`Calendars`.`name` LIKE ? OR `Calendars`.`description` LIKE ?)';
 			connection.query(q,[user_id, searchTerm, searchTerm] ,function(err, rows, fields) {
 				if (!err){
 					cb(null,rows);
@@ -153,7 +152,7 @@ module.exports = {
 		if(changes.hasOwnProperty('status')){
 			key = '`status`';
 			value = parseInt(changes['status']);
-			canContinue = true; 
+			canContinue = true;
 		}
 		if(!canContinue) return cb('Err',null);
 		
@@ -205,6 +204,36 @@ module.exports = {
 				}
 			}else{
 				console.log(err);
+				cb('Err',null);
+			}
+		});
+	},
+	editActivity:function(user_id, challenge_id, day_id, activity_id, changes, connection, cb){
+		let canContinue = false;
+		let key = null;
+		let value = null;
+
+		if(changes.hasOwnProperty('text')){
+			key = '`text`';
+			value = changes['text'];
+			canContinue = true;
+		}
+		if(!canContinue) return cb('Err',null);
+
+		var q = 'UPDATE `DayActivities`\
+		JOIN `Days` ON `Days`.`id` = `DayActivities`.`day_id` \
+		JOIN `Calendars` ON `Calendars`.`id` = `Days`.`calendar_id`\
+		JOIN `Users` ON `Users`.`id` = `Calendars`.`user_id`\
+		SET `DayActivities`.::COL:: = ?\
+		WHERE `DayActivities`.`id` = ?\
+		AND `Days`.`id` = ? \
+		AND `Calendars`.`id` = ?\
+		AND `Users`.`id` = ?';
+		q = q.replace('::COL::', key);
+		connection.query(q,[value, activity_id, day_id, challenge_id, user_id] ,function(err, rows, fields) {
+			if (!err){
+				cb(null,true);
+			}else{
 				cb('Err',null);
 			}
 		});

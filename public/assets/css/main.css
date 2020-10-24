@@ -21,7 +21,6 @@ body,html {
 
 body {
 	background-color: #fff;
-	font-weight: 300;
 	color: #7088a1;
 }
 body::-webkit-scrollbar-thumb {

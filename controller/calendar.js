@@ -185,6 +185,31 @@ module.exports = {
 			}else{
 				res.json(error.getError('INVALID_PARAMS'));
 			}
+		}),
+		router.post('/editActivity',(req,res) => {
+			let request = req.body;
+			if(request.day_id && request.activity_id && request.challenge_id && request.changes){
+				if(req.session.email) {
+					user.getUserId(req.session.email,connection,function(err,response){
+						if(response){
+							let user_id = response.id;
+							calendarModel.editActivity(user_id, request.challenge_id, request.day_id, request.activity_id, request.changes, connection, function(err, response){
+								if(!err){
+									res.json({'code':1,'data':response});
+								}else{
+									res.json(error.getError('QUERY'));
+								}
+							})
+						}else{
+							res.json(error.getError('QUERY'));
+						}
+					})
+				}else{
+					res.json(error.getError('NOT_LOGGED'));
+				}
+			}else{
+				res.json(error.getError('INVALID_PARAMS'));
+			}
 		})
 	},
 }

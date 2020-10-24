@@ -122,13 +122,16 @@
 							Complete
 						</div>
 					</div>
-					<h4>Activity</h4>
+					<div>
+						<h4 class="inline-block">Activity</h4>
+						<small>(<i class="fa fa-info"></i> Click to edit)</small>
+					</div>
 					<div data-bind="foreach:activities">
-						<div style="min-height: 40px;" class="activity">
+						<div class="activity">
 							<button class="btn btn-xs btn-danger delete" data-bind="click: deleteMe">
 								<i class="fa fa-trash"></i>
 							</button>
-							<div data-bind="html:text"></div>
+							<div data-bind="textEditor:text"></div>
 						</div>
 					</div>
 					<div data-bind="visible:activities().length == 0" class="text-center">
