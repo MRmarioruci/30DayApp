@@ -6,6 +6,20 @@ define(['knockout', 'ckeditor'], function (ko, InlineEditor) {
 			InlineEditor
 			.create(element, {
 				removePlugins: [],
+				toolbar: {
+					items: [
+						'heading',
+						'|',
+						'bold',
+						'italic',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'blockQuote',
+						'undo',
+						'redo'
+					]
+				},
 			})
 			.then( e => {
 				if(val)e.setData(val);

@@ -1,3 +1,4 @@
+const sanitizeHtml = require('sanitize-html');
 module.exports = {
 	add:function(name,description,amount,color,user_id,connection,cb){
 		var q = 'INSERT INTO `Calendars`(`name`,`description`,`color`,`user_id`,`creationDate`) VALUES(?,?,?,?,NOW())';
@@ -174,7 +175,7 @@ module.exports = {
 	},
 	addActivity:function(user_id,day_id,text,connection,cb){
 		var q = 'INSERT INTO `DayActivities`(`text`,`day_id`) VALUES(?,?)';
-		connection.query(q,[text,day_id] ,function(err, rows, fields) {
+		connection.query(q,[sanitizeHtml(text), day_id] ,function(err, rows, fields) {
 			if (!err){
 				if(rows){
 					cb(null,rows.insertId);
@@ -215,7 +216,7 @@ module.exports = {
 
 		if(changes.hasOwnProperty('text')){
 			key = '`text`';
-			value = changes['text'];
+			value = sanitizeHtml(changes['text']);
 			canContinue = true;
 		}
 		if(!canContinue) return cb('Err',null);
