@@ -6,7 +6,6 @@ define(['knockout', 'ckeditor'], function (ko, InlineEditor) {
 			InlineEditor
 			.create(element, {
 				removePlugins: [],
-				toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote']
 			})
 			.then( e => {
 				if(val)e.setData(val);
@@ -20,12 +19,14 @@ define(['knockout', 'ckeditor'], function (ko, InlineEditor) {
 			});
 			
 			valueAccessor().subscribe(function (newVal) {
-				if (editor && newVal) {
-					if(editor.getData()!=newVal) editor.setData(newVal);
+				if (editor) {
+					if(newVal){
+						if( editor.getData() != newVal ) editor.setData(newVal);
+					}else{
+						editor.setData(null);
+					}
 				}
 			});
 		},
-		update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-		}
 	};
 });

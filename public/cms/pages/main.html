@@ -124,7 +124,12 @@
 					</div>
 					<h4>Activity</h4>
 					<div data-bind="foreach:activities">
-						<div data-bind="html:text"></div>
+						<div style="min-height: 40px;" class="activity">
+							<button class="btn btn-xs btn-danger delete">
+								<i class="fa fa-trash"></i>
+							</button>
+							<div data-bind="html:text"></div>
+						</div>
 					</div>
 					<div data-bind="visible:activities().length == 0" class="text-center">
 						<img src="assets/images/undraw_activity_tracker_1l9o.svg" style="width:100px;">

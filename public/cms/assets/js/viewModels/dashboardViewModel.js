@@ -18,7 +18,7 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 		self.getData = function(){
             _getData()
             .done(function(data){
-                self.calendar(new Calendar(data[0]));
+                self.calendar(new Calendar(data));
 			})
 		}
         function Calendar(data){

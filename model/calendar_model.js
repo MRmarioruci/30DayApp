@@ -112,37 +112,31 @@ module.exports = {
 			if (!err){
 				let last_id = -1;
 				let i = -1;
-				let out = [];
-				let j = 0;
+				const out = {
+					'id':rows[0].id,
+					'name':rows[0].name,
+					'description':rows[0].description,
+					'creationDate':rows[0].creationDate,
+					'color':rows[0].color,
+					'days':[]
+				}
 				rows.forEach(row => {
-					if(row.id != last_id){
+					if(row.day_id != last_id){
 						i++;
-						out.push({
-							'id':row.id,
-							'name':row.name,
-							'description':row.description,
-							'creationDate':row.creationDate,
-							'color':row.color,
-							'days':[]
-						})
-						last_id = row.id;
-					}
-					if(row.day_id){
-						out[i].days.push({
+						out.days.push({
 							'id':row.day_id,
 							'order':row.order,
 							'status':row.status,
 							'date':row.date,
 							'activities':[]
 						})
-						j = 0;
+						last_id = row.day_id;
 					}
 					if(row.da_id){
-						out[i].days[j].activities.push({
+						out.days[i].activities.push({
 							'id':row.da_id,
 							'text':row.text,
 						})
-						j++;
 					}
 				});
 				cb(null,out);

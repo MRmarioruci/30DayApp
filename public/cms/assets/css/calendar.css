@@ -268,3 +268,15 @@ header {
 	border: 2px solid #f1c205;
 	border-radius: 4px;
 }
+.activity div{
+	min-height: 40px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.activity .delete{
+	display: none;
+}
+.activity:hover .delete{
+	display: inline-block;
+	vertical-align: middle;
+}
