@@ -104,7 +104,13 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
         function Activity(data,parent){
             var act = this;
             act.id = data.id;
-            act.text = ko.observable(data.text);
+			act.text = ko.observable(data.text);
+			act.deleteMe = function(){
+				_deleteActivity(parent.id, act.id)
+				.done(function(d){
+					parent.activities.remove(act);
+				})
+			}
         }
 		function _getData(){
 			var d = $.Deferred();
@@ -154,6 +160,24 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 				}
 			})
 			return d;
-        }
+		}
+		function _deleteActivity(day_id, activity_id){
+			var d = $.Deferred();
+			$.post('/deleteActivity', {
+				'challenge_id': self.calendar().id,
+                'day_id':day_id,
+                'activity_id':activity_id
+            })
+			.done(function (data) {
+				if (data) {
+					if (data.code == 1) {
+						d.resolve(data.data ? data.data : null);
+					} else {
+						d.reject();
+					}
+				}
+			})
+			return d;
+		}
     };
 });

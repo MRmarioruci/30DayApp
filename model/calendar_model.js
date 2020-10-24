@@ -187,4 +187,26 @@ module.exports = {
 			}
 		});
 	},
+	deleteActivity:function(user_id, challenge_id, day_id, activity_id, connection, cb){
+		var q = 'DELETE `DayActivities` \
+		FROM `DayActivities` \
+		JOIN `Days` ON `Days`.`id` = `DayActivities`.`day_id` \
+		JOIN `Calendars` ON `Calendars`.`id` = `Days`.`calendar_id` \
+		WHERE `DayActivities`.`id` = ? \
+		AND `Days`.`id` = ? \
+		AND `Calendars`.`id` = ? \
+		AND `Calendars`.`user_id` = ?';
+		connection.query(q,[activity_id, day_id, challenge_id, user_id] ,function(err, rows, fields) {
+			if (!err){
+				if(rows){
+					cb(null,true);
+				}else{
+					cb('Err',null);
+				}
+			}else{
+				console.log(err);
+				cb('Err',null);
+			}
+		});
+	},
 };
