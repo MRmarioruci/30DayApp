@@ -35,33 +35,35 @@
 </head>
 
 <body>
-	<div style="height:100vh;width:100%;z-index:10;background:#fff;" data-bind="visible:!masterViewModel.inited()">
+	<div class="main__loader" data-bind="visible:!masterViewModel.inited()">
 		<center>
 			<img  src="assets/images/logo.png">
 		</center>
-
-		<div class="nb-spinner" style="margin:auto;margin-top:40vh;"></div>
+		<div class="nb-spinner spinner__margin"></div>
 	</div>
 	<div class="page-container" data-bind="visible:masterViewModel.inited" style="display: none;">
 		<!-- Load sidebar -->
 		<div id="sidebar__container">
 			<!-- ko with:sidebarViewModel-->
-			<div class="page-sidebar" data-bind="style:{'width': isSmall() ? '50px' : ''}" style="overflow-x: hidden;position: relative;">
-				<div style="position: fixed;width: 500px;">
-					<a class="logo-box" href="index.html" style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);padding:4px;padding-left: 15px;">
+			<div class="page-sidebar" data-bind="style:{'width': isSmall() ? '50px' : ''}, css:{'mobile__visible': mobileVisible}">
+				<div style="position: absolute;width:100%;">
+					<button class="btn-neutral pull-right hidden-sm" data-bind="click: toggleSidebar" style="margin-top: 10px;">
+						<i class="fa fa-chevron-right fnt__25" data-bind="visible: isSmall"></i>
+						<i class="fa fa-chevron-left fnt__25" data-bind="visible: !isSmall()"></i>
+					</button>
+					<button class="btn-neutral pull-right visible-sm" data-bind="click: toggleMobileBar" style="margin-top: 10px;">
+						<i class="fa fa-chevron-left fnt__25"></i>
+					</button>
+					<a class="logo-box" data-bind="visible: !isSmall()" href="index.html" style="padding:4px;padding-left: 15px;display: inline-block;width: 80%;">
 						<img src="assets/images/avatar.png" style="width:60px;height:60px;border:2px solid #388FF5;padding:0px;border-radius: 50%;display: inline-block;float:left;">
 						<div style="display: inline-block;margin-left: 20px;" class="mt10">
 							<div class="label__link" data-bind="text:user_name"></div>
 						</div>
-						<button class="btn-neutral pull-right" data-bind="click: toggleSidebar" style="margin-top: 10px;">
-							<i class="fa fa-chevron-left fnt__25" data-bind="visible: !isSmall()"></i>
-							<i class="fa fa-chevron-right fnt__25" data-bind="visible: isSmall"></i>
-						</button>
 						<i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
 						<i class="icon-close" id="sidebar-toggle-button-close"></i>
 					</a>
-					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 100%;margin-top: -20px;">
-						<div class="page-sidebar-inner" style="overflow: hidden; width: auto; height: 100%;">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%;margin-top: -20px;" data-bind="visible:!isSmall()">
+						<div class="page-sidebar-inner" =>
 							<div class="page-sidebar-menu" style="height:91vh;">
 								<div class="menu__block">
 									<div class="d-flex justify-content-center h-100">
@@ -111,14 +113,20 @@
 								</div>
 							</div>
 						</div>
-						<a style="position: absolute;bottom: 0;width:100%;height:50px;border-top:1px dashed #ccc;padding:5px;" href="/logout">
-							<button class="btn btn-neutral" style="float: right;">
-								<i class="fa fa-sign-out fnt__20"></i> Logout
-							</button>
-						</a>
 					</div>
+					<a class="logout__btn" data-bind="css:{'logout__sm': isSmall()}" href="/logout">
+						<button class="btn btn-neutral" style="float: right;">
+							<i class="fa fa-sign-out fnt__20"></i> <span data-bind="visible: !isSmall()">Logout</span>
+						</button>
+					</a>
 				</div>
 			</div>
+			<button class="btn btn-info menu__btn-fixed" data-bind="click: toggleMobileBar">
+				<i class="fa fa-bars fnt__20"></i>
+			</button>
+			<button class="btn btn-info logout__btn-fixed" href="/logout">
+				<i class="fa fa-sign-out fnt__20"></i>
+			</button>
 			<div data-bind="modal:addChallengeModal,with:addChallengeModal" class="modal">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
@@ -198,7 +206,7 @@
 		</div>
 		<!-- End load sidebar -->
 		<!-- Load main content -->
-		<div class="page-content">
+		<div class="page-content" data-bind="css:{'page-content-lg': sidebarViewModel ? (sidebarViewModel.isSmall() ? true : false) : false}">
 			<div data-bind="page: { id: 'Challenge', role: 'start', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/main.html' }" id="dashboard_page">
 			</div>
 		</div>

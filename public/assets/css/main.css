@@ -2621,7 +2621,7 @@ table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc {
 }
 
 .logo-box,.page-sidebar {
-	width: 500px;
+	width: 100%;
 	background: #F9F9F9;
 }
 
@@ -2643,7 +2643,9 @@ table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc {
 	min-height: 100%;
 	float: left;
 	z-index: 100;
-	position: relative
+	overflow-x: hidden;
+	position: fixed;
+	width: 500px;
 }
 
 .page-sidebar-fixed .page-sidebar {
@@ -2998,10 +3000,14 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 	min-height: 56px;
 	vertical-align: bottom;
 	background: #fff;
-	width: calc(100% - 240px);
+	width: calc(100% - 500px);
+	margin-left: 500px;
 	float: right
 }
-
+.page-content-lg{
+	width: calc(100% - 50px);
+	margin-left: 50px;
+}
 .page-sidebar-collapsed .page-content {
 	width: calc(100% - 60px)
 }
@@ -3074,7 +3080,7 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 	.logo-sm,.page-sidebar-collapsed .logo-sm .logo-box span {
 		display: block
 	}
-	
+
 	.page-header-fixed .page-header {
 		left: 0
 	}
@@ -3260,5 +3266,79 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 	.nav-tabs > li > a{
 		font-size: 14px;
 		text-align: center;
+	}
+}
+.logout__btn{
+	position: absolute;
+	bottom: 0;
+	width:100%;
+	height:50px;
+	border-top:1px dashed #ccc;
+	padding:5px;
+}
+.logout__sm{
+    position: absolute;
+	top: 94vh;
+	padding: 0px;
+}
+.logout__btn-fixed{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	z-index: 100;
+	display: none;
+}
+.menu__btn-fixed{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	position: fixed;
+	left: 10px;
+	bottom: 75px;
+	z-index: 100;
+	display: none;
+}
+.hidden-sm{
+	display: inline-block;
+}
+.visible-sm{
+	display: none !important;
+}
+@media only screen and (max-width: 1350px) {
+	.page-sidebar{
+		width: 300px;
+	}
+	.page-content{
+		width: calc(100% - 300px);
+		margin-left: 300px;
+	}
+}
+@media only screen and (max-width: 1000px) {
+	.page-sidebar{
+		width: 50px;
+	}
+	.page-content{
+		width: 100%;
+		margin-left: 0px;
+	}
+	.menu__btn-fixed{
+		display: block;
+	}
+	.logout__btn-fixed{
+		display: block;
+	}
+	.mobile__visible{
+		width: 100%;
+		z-index: 10000;
+		left: unset;
+	}
+	.hidden-sm{
+		display: none;
+	}
+	.visible-sm{
+		display: inline-block !important;
 	}
 }

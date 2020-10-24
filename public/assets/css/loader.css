@@ -38,3 +38,13 @@
         transform: rotate(360deg);
     }
 }
+.main__loader{
+	height:100vh;
+	width:100%;
+	z-index:10;
+	background:#fff;
+}
+.spinner__margin{
+	margin:auto;
+	margin-top:40vh;
+}
