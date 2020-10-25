@@ -13,6 +13,10 @@
 </head>
 <body id="__body__" style="font-family:'Montserrat Alternates';">
 	<div class="login-wrap" style="display: block;">
+		<a class="btn btn-info" href="https://www.buymeacoffee.com/marioruci" style="position: fixed;top: 10px;right: 10px;" target="_blank">
+			<i class="fa fa-donate"></i>
+			Donate
+		</a>
 		<center>
 			<img src="assets/images/logo.png">
 		</center>
@@ -32,6 +36,14 @@
 				<button type="button" class="submit" data-bind="click:_login">
 					<i class="fas fa-spinner fa-spin" data-bind="visible:loginLoading()"></i> Sign In
 				</button>
+				<div class="text-center visible__sm">
+					<h3><b>OR</b></h3>
+					<h4>New here?</h4>
+					<p>Sign up and start your journey towards self improvement!</p>
+					<button type="button" class="btn btn-light" data-bind="click: changePage">
+						Sign Up
+					</button>
+				</div>
 			</div>
 			<div class="sub-cont">
 				<div class="img">
@@ -43,7 +55,7 @@
 						<h2 style="color:#fff;font-weight: bold;">One of us?</h2>
 						<p>If you already have an account, just sign in. We've missed you!</p>
 					</div>
-					<div class="img__btn">
+					<div class="img__btn" data-bind="click: changePage">
 						<span class="m--up">Sign Up</span>
 						<span class="m--in">Sign In</span>
 					</div>
@@ -66,27 +78,65 @@
 						<span>Re-type Password</span>
 						<input type="password" placeholder="Type here..." data-bind="textInput:newPasswordRepeat" />
 					</label>
+					<label>
+						<span>Gender</span>
+						<div class="text-center">
+							<div class="btn-group">
+								<button class="btn gender__btn" data-bind="css:{'btn-info': gender() == 'F', 'btn-light': gender() != 'F'}, click: setGender.bind($data, 'F')">Female</button>
+								<button class="btn gender__btn" data-bind="css:{'btn-info': gender() == 'M', 'btn-light': gender() != 'M'}, click: setGender.bind($data, 'M')">Male</button>
+							</div>
+						</div>
+					</label>
 					<p style="color:red;" data-bind="visible:registerError,text:registerError"></p>
 					<button class="submit" data-bind="click:_register">
 						<i class="fas fa-spinner fa-spin" data-bind="visible:registerLoading()"></i> Sign Up
 					</button>
+					<div class="text-center visible__sm">
+						<h3><b>OR</b></h3>
+						<h4>One of us?</h4>
+						<p>If you already have an account, just sign in. We've missed you!</p>
+						<button type="button" class="btn btn-light" data-bind="click: changePage">
+							Sign Up
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div style="position: fixed;bottom: 0;right:10px;text-align: center;font-size: 17px;">
-		© <script>document.write(new Date().getFullYear())</script>
-		<b>30DayApp</b>. All Rights Reserved.
+	<div style="background: #F5F8FA;height: auto;padding:30px;width: 100%;" class="row">
+		<div class="footer__section">
+			<h5>About</h5>
+			30DayApp is a simple app to keep track of your challenges.<br> Whether it's a 30 day book reading challenge, or a fitness challenge, you can keep track of your progress and have a tool to visualise your goals!
+		</div>
+		<div class="footer__section">
+			<center>
+				© <script>document.write(new Date().getFullYear())</script>
+				<b>30DayApp</b>. All Rights Reserved.
+			</center>
+		</div>
+		<div class="text-right footer__section">
+			<label class="inline-block">Created by</label> <a>Mario Ruci</a>
+			<div>
+				<a href="https://www.linkedin.com/in/mario-ruci-a03689151/" target="_blank" class="btn btn-light" style="width: 50px;">
+					<i class="fa fa-linkedin"></i>
+				</a>
+				<a href="https://github.com/MRmarioruci" target="_blank" class="btn btn-light" style="width: 50px;">
+					<i class="fa fa-github"></i>
+				</a>
+				<a href="https://mrmarioruci.github.io/website/" target="_blank" class="btn btn-light" style="width: 50px;">
+					<i class="fa fa-globe"></i>
+				</a>
+				<a href="mailto: marioruci15@gmail.com" class="btn btn-light" style="width: 50px;">
+					<i class="fa fa-envelope"></i>
+				</a>
+			</div>
+		</div>
 	</div>
+</div>
 </body>
 <script src="https://kit.fontawesome.com/4d40715e6f.js" crossorigin="anonymous"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
 <script src="assets/js/main.js"></script>
-<script>
-	document.querySelector('.img__btn').addEventListener('click', function() {
-		document.querySelector('.cont').classList.toggle('s--signup');
-	});
-</script>
 </html>

@@ -112,13 +112,16 @@ module.exports = {
 			if (!err){
 				let last_id = -1;
 				let i = -1;
-				const out = {
-					'id':rows[0].id,
-					'name':rows[0].name,
-					'description':rows[0].description,
-					'creationDate':rows[0].creationDate,
-					'color':rows[0].color,
-					'days':[]
+				const out = {};
+				if(rows.length > 0){
+					out = {
+						'id':rows[0].id,
+						'name':rows[0].name,
+						'description':rows[0].description,
+						'creationDate':rows[0].creationDate,
+						'color':rows[0].color,
+						'days':[]
+					}
 				}
 				rows.forEach(row => {
 					if(row.day_id != last_id){

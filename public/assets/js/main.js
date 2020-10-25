@@ -14,7 +14,13 @@ function indexViewModel() {
 	self.newPasswordRepeat = ko.observable(null);
 	self.registerLoading = ko.observable(false);
 	self.registerError = ko.observable(null);
-
+	self.gender = ko.observable('M');
+	self.setGender = function(gender){
+		self.gender(gender);
+	}
+	self.changePage = function(){
+		document.querySelector('.cont').classList.toggle('s--signup');
+	}
 	self._login = function(){
 		/** Input checks */
 		if( !self.email() && !self.password() ){
@@ -61,6 +67,7 @@ function indexViewModel() {
 		}else{
 			self.registerError(null);
 		}
+		if(self.registerError()) return false;
 		self.registerLoading(true);
 		register()
 		.done(function(data){
@@ -99,6 +106,7 @@ function indexViewModel() {
 			'name':self.newName(),
 			'email':self.newEmail(),
 			'password':self.newPassword(),
+			'gender': self.gender()
 		};
 		$.post( '/register', o)
 		.done(function( data ){

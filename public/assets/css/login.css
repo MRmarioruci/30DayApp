@@ -27,7 +27,8 @@ input, button {
 	overflow: hidden;
 	position: relative;
 	width: 900px;
-	height: 550px;
+	max-width: 100%;
+	height: 64vh;
 	margin: 0 auto 100px;
 	background: #fff;
 }
@@ -44,6 +45,7 @@ input, button {
 	left: 640px;
 	top: 0;
 	width: 900px;
+	max-width: 100%;
 	height: 100%;
 	padding-left: 260px;
 	background: #fff;
@@ -79,6 +81,7 @@ button {
 	right: 0;
 	top: 0;
 	width: 900px;
+	max-width: 100%;
 	height: 100%;
 	background-image: url('../images/3911672.jpg');
 	background-size: cover;
@@ -240,4 +243,52 @@ input {
 .icon-link--twitter {
 	left: auto;
 	right: 5px;
+}
+.visible__sm{
+	display: none;
+}
+.footer__section{
+	width: 33%;
+}
+@media (max-width: 1000px) {
+	.footer__section{
+		width: 100%;
+		margin: 20px;
+		text-align: center !important;
+	}
+}
+@media (max-width: 900px) {
+	.cont{
+		width: 100%;
+	}
+	.sub-cont{
+		width: 100%;
+		left: 100%;
+	}
+	.img:before{
+		width: 100%;
+	}
+	.form{
+		max-width: 100%;
+		width: 100%;
+	}
+	.img{
+		display: none;
+	}
+	.cont.s--signup .sub-cont {
+		transform: none;
+		left: 0;
+		padding-left: 0;
+	}
+	.gender__btn{
+		width: 150px;
+	}
+	.visible__sm{
+		display: block;
+	}
+}
+@media (max-width: 430px) {
+	.cont{
+		height: 70vh;
+	}
 }

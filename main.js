@@ -22,75 +22,75 @@ let controlCalendar = require('./controller/calendar.js');
 
 /**ENV */
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'mario',
-    password : 'smilemalaka',
-    database : '30DayApp'
+	host     : 'localhost',
+	user     : 'mario',
+	password : 'smilemalaka',
+	database : '30DayApp'
 });
 connection.connect();
 
 app.use(session({
-    secret: 'secret',
-    store: new redisStore({ host: host, port: redis_port, client: client}),
-    saveUninitialized: false,
-    resave: false
+	secret: 'secret',
+	store: new redisStore({ host: host, port: redis_port, client: client}),
+	saveUninitialized: false,
+	resave: false
 }));
 
 app.use(bodyParser.json());      
 app.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/',function(req,res){
-    let sess = req.session;
-    if(sess.email) {
-        return res.redirect('/cms');
-    }
-    res.sendFile('public/index.html', {root: __dirname })
+	let sess = req.session;
+	if(sess.email) {
+		return res.redirect('/cms');
+	}
+	res.sendFile('public/index.html', {root: __dirname })
 });
 router.get('/cms/:path*',function(req,res,next){
-    if(!req.session.email) {
-        res.sendFile('public/cms/not_logged.html', {root: __dirname })
-    }else{
-        next()
-    }
+	if(!req.session.email) {
+		res.sendFile('public/cms/not_logged.html', {root: __dirname })
+	}else{
+		next()
+	}
 });
 router.get('/logout',(req,res) => {
-    req.session.destroy((err) => {
-        if(err) {
-            return console.log(err);
-        }
-        res.redirect('/');
-    });
+	req.session.destroy((err) => {
+		if(err) {
+			return console.log(err);
+		}
+		res.redirect('/');
+	});
 });
-router.post('/register',(req,res) => {
-    if(req.session.email) return res.json({'status':'err','data':'Alredy logged in'});
-
-    register.register(req.body.name,req.body.email,req.body.password, connection, function(err,data){
-        if(!err){
-            logger.log('info', 'Registration complete');
-            req.session.email = req.body.email;
-            res.json({'status':'ok','data':data});
-        }else{
-            logger.log('warn', 'Registration error:', err);
-            res.json({'status':'err','data':false});
-        }
-    });
+router.post('/register',async (req,res) => {
+	if(req.session.email) return res.json({'status':'err','data':'Alredy logged in'});
+	
+	await register.register(req.body.name,req.body.email,req.body.password, req.body.gender, connection)
+	.then(d => {
+		logger.log('info', 'Registration complete');
+		req.session.email = req.body.email;
+		res.json({'status':'ok','data':d});
+	})
+	.catch(d => {
+		logger.log('warn', 'Registration error:', err);
+		res.json({'status':'err','data':false});
+	})
 });
 router.all('/login',(req,res) => {
-    if(req.session.email) return res.json({'status':'err','data':'Alredy logged in'});
-
-    login.login(req.body.email,req.body.password, connection, function(err,data){
-        if(!err){
-            logger.log('info', 'Login success');
-            req.session.email = req.body.email;
-            res.json({'status':'ok','data':data});
-        }else{
-            logger.log('warn', 'Login error', err);
-            res.json({'status':'err','data':false});
-        }
-    });
+	if(req.session.email) return res.json({'status':'err','data':'Alredy logged in'});
+	
+	login.login(req.body.email,req.body.password, connection, function(err,data){
+		if(!err){
+			logger.log('info', 'Login success');
+			req.session.email = req.body.email;
+			res.json({'status':'ok','data':data});
+		}else{
+			logger.log('warn', 'Login error', err);
+			res.json({'status':'err','data':false});
+		}
+	});
 });
 router.all('/isLoggedIn',(req,res) => {
-    if(req.session.email){
+	if(req.session.email){
 		res.json({'status':'ok','data':true});
 	}else{
 		res.json({'status':'ok','data':false});
@@ -100,6 +100,6 @@ router.all('/isLoggedIn',(req,res) => {
 app.use('/', router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(process.env.PORT || 3000,() => {
-    logger.log('info', `App Started on PORT ${process.env.PORT || 3000}`);
-    controlCalendar.run(router,connection,logger);
+	logger.log('info', `App Started on PORT ${process.env.PORT || 3000}`);
+	controlCalendar.run(router,connection,logger);
 });
