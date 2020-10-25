@@ -55,7 +55,7 @@
 						<i class="fa fa-chevron-left fnt__25"></i>
 					</button>
 					<a class="logo-box" data-bind="visible: !isSmall()" href="index.html" style="padding:4px;padding-left: 15px;display: inline-block;width: 80%;">
-						<img src="assets/images/avatar.png" style="width:60px;height:60px;border:2px solid #388FF5;padding:0px;border-radius: 50%;display: inline-block;float:left;">
+						<img data-bind="attr:{'src': gender() == 'M' ? 'assets/images/man.svg' : 'assets/images/girl.svg'}" style="width:60px;height:60px;border:2px solid #388FF5;padding:0px;border-radius: 50%;display: inline-block;float:left;">
 						<div style="display: inline-block;margin-left: 20px;" class="mt10">
 							<div class="label__link" data-bind="text:user_name"></div>
 						</div>
@@ -124,9 +124,9 @@
 			<button class="btn btn-info menu__btn-fixed" data-bind="click: toggleMobileBar">
 				<i class="fa fa-bars fnt__20"></i>
 			</button>
-			<button class="btn btn-info logout__btn-fixed" href="/logout">
-				<i class="fa fa-sign-out fnt__20"></i>
-			</button>
+			<a class="btn btn-light logout__btn-fixed" href="/logout">
+				<i class="fa fa-sign-out fnt__20" style="margin-top: 13px;margin-left: 5px;"></i>
+			</a>
 			<div data-bind="modal:addChallengeModal,with:addChallengeModal" class="modal">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">

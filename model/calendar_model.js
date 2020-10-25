@@ -112,7 +112,7 @@ module.exports = {
 			if (!err){
 				let last_id = -1;
 				let i = -1;
-				const out = {};
+				let out = {};
 				if(rows.length > 0){
 					out = {
 						'id':rows[0].id,

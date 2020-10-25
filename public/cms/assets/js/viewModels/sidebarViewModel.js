@@ -2,7 +2,8 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 	return new function sidebarViewModel() {
 		var self = this;
 		self.currentPage = ko.observable('Dashboard');
-		self.user_name = ko.observable('Mario Ruci');
+		self.user_name = ko.observable('');
+		self.gender = ko.observable('M');
 		self.addChallengeModal = ko.observable(null);
 		self.deleteChallengeModal = ko.observable(null);
 		self.isSmall = ko.observable(false);
@@ -70,6 +71,7 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 				var user = data.user_info;
 				var calendars = data.calendars;
 				self.user_name(user.name);
+				self.gender(user.gender);
 				self.calendars($.map(calendars,function(calendar){
 					return new Calendar(calendar);
 				}))

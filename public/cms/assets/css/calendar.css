@@ -279,3 +279,68 @@ header {
 	background: #F9F9F9;
 	width: 90%;
 }
+.stat__card{
+	height: 100px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+	overflow: hidden;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 10px;
+	background: #F9F9F9;
+	width: 30%;
+}
+.stat__inner{
+	width: 100%;
+}
+.stat__left{
+	width:65%;
+	display: inline-block;
+	padding-top: 20px;
+}
+.stat__right{
+	width:30%;
+	display: inline-block;
+}
+.stat__image{
+	width:100%;
+	margin-top: -20px;
+}
+.day__date{
+	position:absolute;
+	bottom:5px;
+	width:100%;
+	opacity: 0.6;
+}
+.footer__fixed{
+	position: fixed;
+	bottom: 0;
+	right:10px;
+	text-align: center;
+	font-size: 17px;
+	background:#fff;
+	border-radius: 5px;
+	padding:5px;
+}
+.activity__text{
+	height: 90px;
+	margin-bottom: 10px;
+	position:relative;
+	border: 1px solid #eee;
+}
+.no__challenges{
+	width: 340px;
+	margin: auto;
+	border:4px solid #F9F9F9;
+	border-radius: 13px;
+	padding:20px;
+	text-align:center;
+	margin-top:40vh;
+}
+.page-inner__wrap{
+	background:#fff;overflow-y: auto;overflow-x: hidden;
+}
+@media (max-width: 710px) {
+	.stat__card{
+		width: 100%;
+	}
+}

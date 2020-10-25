@@ -1,5 +1,5 @@
 <!-- ko ifnot:calendar-->
-	<div style="width: 340px;margin: auto;border:4px solid #F9F9F9;border-radius: 13px;padding:20px;text-align:center;margin-top:40vh;">
+	<div class="no__challenges">
 		<img src="assets/images/logo.png" class="img-responsive">
 	</div>
 <!-- /ko -->
@@ -15,47 +15,47 @@
 	</div>
 </div>
 <div class="page-inner">
-	<div id="main-wrapper" style="background:#fff;overflow-y: auto;overflow-x: hidden;">
+	<div id="main-wrapper" class="page-inner__wrap">
 		<div class="calendar-container">
 			<div class="calendar-container__body">
 				<div class="calendar-table">
 					<div class="row">
-						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
-							<div style="width: 100%;">
-								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+						<div class="stat__card">
+							<div class="stat__inner">
+								<div class="text-center stat__left">
 									<h4 style="font-size: 27px;">
 										<span data-bind="text: incomplete"></span>%
 									</h4>
 									<div class="fnt__22">Incomplete</div>
 								</div>
-								<div style="width:30%;display: inline-block;">
-									<img src="assets/images/undraw_Notify_re_65on.svg" style="width:100%;margin-top: -20px;">
+								<div class="stat__right">
+									<img src="assets/images/undraw_Notify_re_65on.svg" class="stat__image">
 								</div>
 							</div>
 						</div>
-						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
-							<div style="width: 100%;">
-								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+						<div class="stat__card">
+							<div class="stat__inner">
+								<div class="text-center stat__left">
 									<h4 style="font-size: 27px;">
 										<span data-bind="text: inprogress"></span>%
 									</h4>
 									<div class="fnt__22">In progress</div>
 								</div>
-								<div style="width:30%;display: inline-block;">
-									<img src="assets/images/undraw_Jogging_t14q.svg" style="width:100%;margin-top: -20px;">
+								<div class="stat__right">
+									<img src="assets/images/undraw_Jogging_t14q.svg" class="stat__image">
 								</div>
 							</div>
 						</div>
-						<div style="height: 100px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; overflow: hidden; border-radius: 10px; padding: 5px; margin: 10px; background: #F9F9F9;width: 30%;">
-							<div style="width: 100%;">
-								<div style="width:65%;display: inline-block;padding-top: 20px;" class="text-center">
+						<div class="stat__card">
+							<div class="stat__inner">
+								<div class="text-center stat__left">
 									<h4 style="font-size: 27px;">
 										<span data-bind="text: complete"></span>%
 									</h4>
 									<div class="fnt__22">Complete</div>
 								</div>
-								<div style="width:30%;display: inline-block;">
-									<img src="assets/images/undraw_completed_ngx6.svg" style="width:100%;margin-top: -20px;">
+								<div class="stat__right">
+									<img src="assets/images/undraw_completed_ngx6.svg" class="stat__image">
 								</div>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 										</div>
 										<!-- /ko -->
 									</div>
-									<div style="position:absolute; bottom:5px;width:100%;" class="text-center text-muted" data-bind="text: date">
+									<div class="day__date" class="text-center text-muted" data-bind="text: date">
 									</div>
 								</div>
 							</div>
@@ -97,7 +97,7 @@
 	</div>
 </div>
 <!-- /ko -->
-<div style="position: fixed;bottom: 0;right:10px;text-align: center;font-size: 17px;background:#fff;border-radius: 5px;padding:5px;">
+<div class="footer__fixed">
 	© 2020 <b>30DayApp</b>. All Rights Reserved.
 </div>
 <div data-bind="modal:editModal,with:editModal" class="modal">
@@ -142,7 +142,7 @@
 					<br>
 					<div class="form-group">
 						<label>Add activity</label>
-						<div class="form-control form__control-lg" data-bind="textEditor:newActivity" style="height: 90px;margin-bottom: 10px;position:relative;border: 1px solid #eee;" placeholder="Add activity...">
+						<div class="form-control form__control-lg activity__text" data-bind="textEditor:newActivity" placeholder="Add activity...">
 						</div>
 						<button class="btn btn-success" data-bind="click:addActivity">
 							<i class="fa fa-plus"></i>
