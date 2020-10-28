@@ -71,16 +71,12 @@ function indexViewModel() {
 		self.registerLoading(true);
 		register()
 		.done(function(data){
-			if(data.status != 'err'){
-				window.location.href = "/cms";
-				self.newEmail(null);
-				self.newPassword(null);
-				self.newPasswordRepeat(null);
-				self.newName(null);
-				self.registerError(null);
-			}else{
-				self.registerError('Registration error!');
-			}
+			window.location.href = "/cms";
+			self.newEmail(null);
+			self.newPassword(null);
+			self.newPasswordRepeat(null);
+			self.newName(null);
+			self.registerError(null);
 		})
 		.fail(function(data){
 			self.registerError('Registration error!');

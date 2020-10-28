@@ -60,6 +60,9 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 				self.newDescription(null);
 				self.newAmount(30);
 				self.getData(true);
+				if(self.mobileVisible()){
+					self.toggleMobileBar();
+				}
 			})
 			.always(function(){
 				self.adding(false);
@@ -75,7 +78,7 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 				self.calendars($.map(calendars,function(calendar){
 					return new Calendar(calendar);
 				}))
-				if(redirect_to_last){
+				if(redirect_to_last && (self.calendars().length > 0)){
 					var last = self.calendars()[self.calendars().length-1].id;
 					location.href = "/cms/#Challenge?id="+last;
 				}
@@ -85,7 +88,6 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 			var calendars = self.calendars();
 			ko.utils.arrayFilter(calendars,function(calendar){
 				if(calendar.isCurrent()) calendar.isCurrent(false);
-				console.log(id);
 				if(id == calendar.id) calendar.isCurrent(true);
 			})
 		}
@@ -104,6 +106,12 @@ define(['knockout', 'jquery','moment','modal','charCount'], function (ko, $, mom
 				_deleteChallenge(ca.id)
 				.done(function(d){
 					if(d) self.calendars.remove(ca);
+					var first = self.calendars().length > 0 ? self.calendars()[0].id : null;
+					if(first){
+						location.href = "/cms/#Challenge?id="+first;
+					}else{
+						location.href = '/cms';
+					}
 				})
 			}
 		}

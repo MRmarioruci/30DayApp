@@ -9,7 +9,10 @@ define(['knockout', 'jquery','moment','sidebarViewModel','modal'], function (ko,
 		var sidebar = sidebarViewModel;
         self.id.subscribe(function(newv){
             self.getData();
-            sidebar.setCurrent(newv);
+			sidebar.setCurrent(newv);
+			if(sidebar.mobileVisible()){
+				sidebar.toggleMobileBar();
+			}
         })
         self.name = ko.observable(null);
 		self.init = function(page){

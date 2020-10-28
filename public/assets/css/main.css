@@ -3332,7 +3332,7 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 	}
 	.mobile__visible{
 		width: 100%;
-		z-index: 10000;
+		z-index: 100;
 		left: unset;
 	}
 	.hidden-sm{

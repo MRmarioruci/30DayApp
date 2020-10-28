@@ -207,7 +207,12 @@
 		<!-- End load sidebar -->
 		<!-- Load main content -->
 		<div class="page-content" data-bind="css:{'page-content-lg': sidebarViewModel ? (sidebarViewModel.isSmall() ? true : false) : false}">
-			<div data-bind="page: { id: 'Challenge', role: 'start', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/main.html' }" id="dashboard_page">
+			<div data-bind="page: { id: '/', role: 'start'}" id="main" class="page-content">
+				<div class="no__challenges">
+					<img src="assets/images/logo.png" class="img-responsive">
+				</div>
+			</div>
+			<div data-bind="page: { id: 'Challenge', params: ['id'], title: 'Challenge', withOnShow: requireViewModel('dashboardViewModel',$root),sourceOnShow:'pages/main.html' }" id="dashboard_page">
 			</div>
 		</div>
 		<!-- End load main content -->
