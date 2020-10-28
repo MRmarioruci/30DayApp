@@ -3209,10 +3209,10 @@ body:not(.page-sidebar-fixed) .page-sidebar .slimScrollDiv {
 .form__control-lg{height:40px;}
 
 .page__header-left{
-	display: inline-block;width: 50%;padding: 10px;float: left;
+	display: inline-block;width: 100% !important;padding: 10px;float: left;
 }
 .page__header-right{
-	display: inline-block;width: 50%;float: left;text-align:right;
+	display: inline-block;width: 0%;float: left;text-align:right;
 }
 .pointer{
 	cursor:pointer !important;

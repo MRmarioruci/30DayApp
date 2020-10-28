@@ -1,14 +1,14 @@
 {
-  "name": "gitmanager",
+  "name": "challengeist",
   "version": "1.0.0",
-  "description": "a personal git manager for tracking commits and seeing statistics",
+  "description": "Challenges app",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Git",
-    "Manager"
+    "Fitness",
+    "Tracker"
   ],
   "author": "Mario Ruci",
   "license": "ISC",
