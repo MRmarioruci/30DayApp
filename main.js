@@ -36,7 +36,7 @@ app.use(session({
 	resave: false
 }));
 
-app.use(bodyParser.json());      
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/',function(req,res){
@@ -70,7 +70,7 @@ router.post('/register',async (req,res) => {
 		req.session.email = req.body.email;
 		res.json({'status':'ok','data':d});
 	})
-	.catch(d => {
+	.catch(err => {
 		logger.log('warn', 'Registration error:', err);
 		res.json({'status':'err','data':false});
 	})
