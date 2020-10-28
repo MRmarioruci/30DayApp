@@ -289,6 +289,12 @@ input {
 }
 @media (max-width: 430px) {
 	.cont{
-		height: 70vh;
+		height: auto;
+	}
+	.s--signup{
+		height: 830px;
+	}
+	.sub-cont{
+		height: 830px;
 	}
 }

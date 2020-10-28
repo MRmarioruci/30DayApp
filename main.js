@@ -9,8 +9,8 @@ const path = require('path');
 const client  = redis.createClient();
 const router = express.Router();
 const app = express();
-const redis_port = 6379;
-const host = 'localhost';
+const redis_port = process.env.REDIS_PORT;
+const host = process.env.REDIS_HOSTNAME;
 
 /** Models */
 let login = require('./model/login_model.js');
@@ -22,10 +22,10 @@ let controlCalendar = require('./controller/calendar.js');
 
 /**ENV */
 var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'mario',
-	password : 'smilemalaka',
-	database : '30DayApp'
+	host     : process.env.DB_HOST,
+	user     : process.env.DB_USER,
+	password : process.env.DB_PASS,
+	database : process.env.DB_DATABASE,
 });
 connection.connect();
 
